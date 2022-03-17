@@ -1,6 +1,4 @@
 import unittest
-
-from datetime import date
 from ergstapiclient import url_builder, earliest_year, season_checker, rnd_checker
 
 
@@ -15,39 +13,29 @@ class TestSeasonFormat(unittest.TestCase):
     def test_correct_earliest_year(self):
         year = 1950
         self.assertEqual(earliest_year, year)
-    
+
     def test_correct_season_length(self):
-        test_year = date(2021, 1, 1)
-        season = 2021 
-        self.assertTrue(season_checker(season,False))
-    
+        season = 2021
+        self.assertTrue(season_checker(season, False))
+
     def test_wrong_season_lengthshort(self):
-        test_year = date(2, 1, 1)
-        season = test_year.year
-        self.assertFalse(season_checker(season,False))
+        season = 2
+        self.assertFalse(season_checker(season, False))
 
     def test_wrong_season_lengthlong(self):
-       	season = 20222 
-        self.assertFalse(season_checker(season,False))
-    """
-    Handle this exception when input transfered from discord to python, not here 
-    def test_non_integer_season(self):
-        season = 202a
-        self.assertFalse(season_checker(202a,False))
-    """
+        season = 20222
+        self.assertFalse(season_checker(season, False))
+
     def test_season_outofrange_low(self):
-        test_year = date(1930, 1, 1)
-        season = test_year.year
+        season = 1930
         self.assertFalse(season_checker(season, False))
 
     def test_season_outofrange_high(self):
-        test_year = date(3330, 1, 1)
-        season = test_year.year
+        season = 3330
         self.assertFalse(season_checker(season, False))
 
     def test_season_inrange(self):
-        test_year = date(1980, 1, 1)
-        season = test_year.year
+        season = 1980
         self.assertTrue(season_checker(season, False))
 
     def test_season_correctkeyword(self):

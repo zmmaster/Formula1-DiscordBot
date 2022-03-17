@@ -2,13 +2,11 @@ import requests
 from requests.exceptions import HTTPError, ConnectionError, Timeout
 from datetime import date
 
-# PLEASE PUT CORRECT REFERENCES TO CODE FORMATS COPIED FROM REAL PYTHON
 base_url = "https://ergast.com/api/f1"
 
 today = date.today()
 current_year = today.year
-ergst_earliest_date = date(1950, 1, 1)  # Filling in month=1, day=1 so date obj created
-earliest_year = ergst_earliest_date.year
+earliest_year = 1950
 
 first_rnd = 1
 last_rnd = 22
@@ -21,7 +19,8 @@ def season_checker(season, keyword=True):
             return True
         return False
 
-    elif ((earliest_year < season and season < current_year) and (f"{season}".isdigit())):
+    elif ((earliest_year < season and season < current_year) and
+          (f"{season}".isdigit())):
         return True
     else:
         return False
@@ -45,8 +44,14 @@ def url_builder(season="current", rnd="next"):
     return endpoint
 
 
-# Maybe don't have this take anyparametes and it just makes a call to url_builder w/in?
 def make_request(endpoint):
+    """
+       The exception format below was borrowed from an article on Real Python
+       Link: https://realpython.com/python-requests/
+       Title: Python's Requests Library (Guide)
+       Article author: Alex Ronquillo
+    """
+
     try:
         r = requests.get(endpoint, timeout=5)
 
