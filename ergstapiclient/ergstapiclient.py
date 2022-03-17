@@ -39,6 +39,17 @@ def rnd_checker(rnd, keyword=True):
         return False
 
 
+def is_alpha(endpoint_variable):
+   return (f"{endpoint_variable}".isalpha()) 
+
+
+def correct_format_helper(season, rnd):
+    seasonkeyword = is_alpha(season)  
+    rndkeyword = is_alpha(rnd)  
+    return (season_checker(season, seasonkeyword) and 
+            rnd_checker(rnd, rndkeyword))
+
+
 def url_builder(season="current", rnd="next"):
     endpoint = f"{base_url}/{season}/{rnd}.json"
     return endpoint
@@ -69,5 +80,5 @@ def make_request(endpoint):
         print('Success!')
 
 
-if ('__name__' == '__main__'):
+if (__name__ == '__main__'):
     pass
